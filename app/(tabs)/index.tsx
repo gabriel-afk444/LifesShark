@@ -2,9 +2,22 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Image } from 'expo-image';
-import { ImageBackground, Linking, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList, ImageBackground, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function HomeScreen() {
+
+  const praias = [
+  { nome: 'Praia do Forte', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=" , id:1},
+  { nome: 'Porto de Galinhas', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=",id:2},
+  { nome: 'Praia de Intermares', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=",id:3 },
+  { nome: 'Praia de Intermares', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=" ,id:4},
+  { nome: 'Praia de Intermares', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=",id:5 },
+  { nome: 'Praia de Intermares', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=",id:6 },
+  { nome: 'Praia de Intermares', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=" ,id:7},
+  
+
+];
+
   return ( 
     
     <ParallaxScrollView
@@ -17,11 +30,32 @@ export default function HomeScreen() {
         />
       }>
       
+
     
-      <ImageBackground
+    
+    <View style={styles.listContainer}>
+      <FlatList
+        horizontal
+        data={praias}
+        keyExtractor={(item) => item.id.toString()}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.lista}
+        renderItem={({ item }) => (
+          <View style={styles.card} key={item.id}>
+            <Image source={{uri:item.imagem}} style={styles.imagem} />
+            <Text style={styles.nome}>{item.nome}</Text>
+          </View>
+        )}
+      />
+    </View>
+    
+<Text>  uksdgajf</Text>
+     <ImageBackground
     source={require('@/assets/images/texturazul.png')}
     style={styles.background}
     resizeMode='cover'>
+     
+     <View style={styles.align}>
       <TouchableOpacity onPress={() => Linking.openURL('https://g1.globo.com/pb/paraiba/noticia/2025/05/08/sem-conseguir-mergulhar-tartaruga-marinha-e-resgatada-no-mar-da-praia-de-intermares-em-cabedelo.ghtml')}>
       <ThemedView style={styles.box}>
         <Image
@@ -68,17 +102,33 @@ export default function HomeScreen() {
         <ThemedText style={styles.boxText} type='subtitle'>Fiscalização é reforçada no Grande Recife após 2º ataque de tubarão em 24h
         </ThemedText>
       </ThemedView></TouchableOpacity>
-    
+    </View>
       </ImageBackground>
-    
+
      </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+    mainContainer: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  listContainer: {
+    zIndex: 1, 
+    marginBottom: 10, 
+  },
+  
   background:{
-    position:'static'
+    position:'static',
+    
+  },
+  align:{
+    width: '100%', 
+    alignItems: 'center', 
+    paddingBottom: 20,
 
+ 
   },
   titleContainer: {
     flexDirection: 'row',
@@ -101,21 +151,20 @@ const styles = StyleSheet.create({
     marginLeft:-40,
   },
   box: {//box da noticia
-    flexDirection:'row-reverse',
-    justifyContent:'space-between',
-    width: 350,
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    width: '100%', 
+    maxWidth: 350, 
     height: 80,
-    backgroundColor: '#2c7aa4', 
+    backgroundColor: '#2c7aa4',
     borderRadius: 10,
     alignItems: 'center',
     marginVertical: 10,
-    marginTop: 0,
-    marginLeft:-30,
     elevation: 0,
-    borderWidth: 2,   
-    borderColor: 'white',     
-    
-    
+    borderWidth: 2,
+    borderColor: 'white',
+    padding: 10,
+    alignSelf: 'center',
   },
   boxText: {
     color: '#fff', 
@@ -127,9 +176,33 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height:70,
     width:100,
-    marginBottom : 8,
     
     
     
-  }
+    
+  },
+
+  Content:{
+  alignSelf: 'center',
+  textAlign: 'center'
+  },
+    lista: {
+    paddingHorizontal: 10,
+  },
+  card: {
+    width: 150,
+    marginRight: 10,
+    alignItems: 'center',
+  },
+  imagem: {
+    width: 140,
+    height: 100,
+    borderRadius: 10,
+  },
+  nome: {
+    marginTop: 5,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
 });
