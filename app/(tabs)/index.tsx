@@ -2,21 +2,26 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Image } from 'expo-image';
-import { Linking, StyleSheet, TouchableOpacity } from 'react-native';
+import { ImageBackground, Linking, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function HomeScreen() {
-  return (
+  return ( 
+    
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      backgraundcolor ={ #B0C4DE}
+      
       headerImage={
         <Image
-          source={require('@/assets/images/tubarao-pag.png')}
+          source={require('@/assets/images/LifeShark.png')}
           style={styles.reactLogo}
         />
       }>
       
-      
+    
+      <ImageBackground
+    source={require('@/assets/images/texturazul.png')}
+    style={styles.background}
+    resizeMode='cover'>
       <TouchableOpacity onPress={() => Linking.openURL('https://g1.globo.com/pb/paraiba/noticia/2025/05/08/sem-conseguir-mergulhar-tartaruga-marinha-e-resgatada-no-mar-da-praia-de-intermares-em-cabedelo.ghtml')}>
       <ThemedView style={styles.box}>
         <Image
@@ -64,13 +69,17 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView></TouchableOpacity>
     
-      
+      </ImageBackground>
     
      </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  background:{
+    position:'static'
+
+  },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -82,10 +91,10 @@ const styles = StyleSheet.create({
   },
   reactLogo: {
     height: 250,
-    width: 500,
+    width: 380,
     bottom: 0,
     left: 0,
-    position: 'absolute',
+    position: 'relative',
   },
   container: {
     flex: 1,
@@ -96,19 +105,15 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     width: 350,
     height: 80,
-    backgroundColor: '#20B2AA', 
+    backgroundColor: '#2c7aa4', 
     borderRadius: 10,
     alignItems: 'center',
     marginVertical: 10,
     marginTop: 0,
     marginLeft:-30,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    borderWidth: 2,             // espessura da borda
-    borderColor: 'white',        // cor da borda
+    elevation: 0,
+    borderWidth: 2,   
+    borderColor: 'white',     
     
     
   },
