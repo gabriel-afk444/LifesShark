@@ -2,21 +2,51 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Image } from 'expo-image';
-import { FlatList, ImageBackground, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Link, RelativePathString } from 'expo-router';
+import { useState } from 'react';
+import { FlatList, ImageBackground, Linking, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+
 
 export default function HomeScreen() {
 
-  const praias = [
-  { nome: 'Praia do Forte', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=" , id:1},
-  { nome: 'Porto de Galinhas', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=",id:2},
-  { nome: 'Praia de Intermares', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=",id:3 },
-  { nome: 'Praia de Intermares', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=" ,id:4},
-  { nome: 'Praia de Intermares', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=",id:5 },
-  { nome: 'Praia de Intermares', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=",id:6 },
-  { nome: 'Praia de Intermares', imagem: "https://media.istockphoto.com/id/2109307130/pt/foto/partial-view-of-the-formoso-river-in-the-municipal-resort-in-bonito-in-mato-grosso-do-sul-the.jpg?s=2048x2048&w=is&k=20&c=49NdwOUwstim_n71tyn2hMGaobAJE5wAoEGq9xdrl1o=" ,id:7},
-  
-
+const praias = [
+  {
+    id: 1,
+    nome: 'Praia de Boa Viagem',
+    imagem: 'https://viagemeturismo.abril.com.br/wp-content/uploads/2024/03/Portal-da-CopabarraME.jpg?crop=1&resize=1212,909',
+    rota: "/pages/BoaViagem"
+  },
+  {
+    id: 2,
+    nome: 'Porto de Galinhas',
+    imagem: 'https://pousadadasgalinhas.com.br/wp-content/uploads/2024/07/porto-de-galinhas-2.webp',
+    rota: "/pages/Porto"
+  },
+  {
+    id: 3,
+    nome: 'Praia dos Carneiros',
+    imagem: 'https://magazine.zarpo.com.br/wp-content/uploads/2021/06/capa-praia-dos-carneiros.jpg',
+    rota: "/pages/Carneiros"
+  },
+  {
+    id: 4,
+    nome: 'Praia de Calhetas',
+    imagem: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/8a/a6/8f/vista-da-praia.jpg?w=1200&h=-1&s=1',
+    rota: "/pages/Calhetas"
+  },
+  {
+    id: 5,
+    nome: 'Praia do Paiva',
+    imagem: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/f2/6f/55/photo4jpg.jpg?w=900&h=500&s=1',
+    rota: "/pages/Paiva"
+  }
 ];
+
+const [searchText, setSearchText] = useState('');
+
+const praiasFiltradas = praias.filter(praia =>
+  praia.nome.toLowerCase().includes(searchText.toLowerCase())
+);
 
   return ( 
     
@@ -29,27 +59,63 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
       }>
-      
 
+  <View style={{ padding: 10, zIndex: 2 }}>
+  <TextInput
+    placeholder="Buscar praia..."
+    value={searchText}
+    onChangeText={setSearchText}
+    style={{
+      backgroundColor: '#f0f0f0',
+      borderRadius: 10,
+      padding: 10,
+      fontSize: 16,
+    }}
+  />
+</View>
+
+    {searchText !== '' ? (
+  <View style={styles.listContainer}>
+    <FlatList
+      horizontal
+      data={praiasFiltradas}
+      keyExtractor={(item) => item.id.toString()}
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.lista}
+      renderItem={({ item }) => (
+         <Link href={item.rota as `${RelativePathString}`}>
+        <View style={styles.card} key={item.id}>
+          <Image source={{ uri: item.imagem }} style={styles.imagem} />
+          <Text style={styles.nome}>{item.nome}</Text>
+        </View>
+        </Link>
+      )}
+    />
+  </View>
+) : (
+  <>
     
-    
+
     <View style={styles.listContainer}>
-      <FlatList
-        horizontal
-        data={praias}
-        keyExtractor={(item) => item.id.toString()}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.lista}
-        renderItem={({ item }) => (
-          <View style={styles.card} key={item.id}>
-            <Image source={{uri:item.imagem}} style={styles.imagem} />
-            <Text style={styles.nome}>{item.nome}</Text>
-          </View>
-        )}
-      />
+      
+<FlatList
+  horizontal
+  data={praias}
+  keyExtractor={(item) => item.id.toString()}
+  showsHorizontalScrollIndicator={false}
+  contentContainerStyle={styles.lista}
+  renderItem={({ item }) => (
+    <Link href={item.rota as `${RelativePathString}`} asChild>
+      <TouchableOpacity style={styles.card}>
+        <Image source={{uri: item.imagem}} style={styles.imagem} />
+        <Text style={styles.nome}>{item.nome}</Text>
+      </TouchableOpacity>
+    </Link>
+  )}
+/>
     </View>
     
-<Text>  uksdgajf</Text>
+
      <ImageBackground
     source={require('@/assets/images/texturazul.png')}
     style={styles.background}
@@ -104,7 +170,9 @@ export default function HomeScreen() {
       </ThemedView></TouchableOpacity>
     </View>
       </ImageBackground>
-
+  </>
+)}
+     
      </ParallaxScrollView>
   );
 }
