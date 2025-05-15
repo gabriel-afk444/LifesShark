@@ -1,50 +1,64 @@
-# Welcome to your Expo app 👋
+# LifeShark :shark:
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Este projeto de **LifeShark** faz parte do projeto para disciplina de **Programação Para Dispositivos Móveis em Android** desenvolvida com **React Native e TypeScript**. Os usuários podem encontrar nesse App informações gerais sobre tubarões em praias de Recife/PE, bem como dados turísticos e educativos sobre cada praia.
 
-## Get started
+## 🚀 Funcionalidades
 
-1. Install dependencies
+- **Feed de Notícias**: diversas materias relacionadas a tubarões.
+- **Informaçoes educativas sobre Fauna Marinha**: Mostra informações educativas sobre espécies marinhas em praias de Recife/PE.
+- **Informações sobre praias**: ostra informações sobre clima, tábua de maré, turismo e linhs de ônibus de cada praia de Recife/PE.
 
-   ```bash
-   npm install
+## 🛠️ Tecnologias Utilizadas
+
+- **React Native**
+- **TypeScript**
+
+## 📌 Como Usar
+
+1. **Clone este repositório:**
    ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
+   git clone https://github.com/gabriel-afk444/LifesShark.git
    ```
+2. **Entre na pasta do projeto**
+```cd lifesshark```
+3. **Baixe as dependencias**
+```npx expo install --check```
+4. **Inicie o App**
+```npx expo start```
 
-In the output, you'll find options to open the app in a
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+4. **Utilize o aplicativo Expo Go para rodar o app LifeShark em aparelho Android**
+```escanei o QR-code gerado```
+5. **Utilize o navegador para rodar em pc, digite na barra de endeeço:**
+```localhost:8081```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Configurar o ambiente e Pré-requisitos
 
-## Get a fresh project
+**Necessita ter instalado:**
+```Node.js: https://nodejs.org```
 
-When you're ready, run:
+**Expo CLI (para facilitar o desenvolvimento React Native):**
+```npm install -g expo-cli```
 
-```bash
-npm run reset-project
+## 📂 Estrutura do Projeto
+
+```
+Criar estrutura de pastas e arquivos.
+
+📁lifesshark/
+├──📁app/                   # Cada tela do app (interface principal)
+│   ├──📄Index.tsx          # Arquivo principal do app
+│   └──📁pages
+├──📁assets/                # Imagens, ícones, etc.
+├──📁components/            # Componentes reutilizáveis (ex: Card, Header)
+├──📁constants/             # Cores, estilos globais, configurações fixas
+│   └──📄colors.ts
+├──📁hooks/                            
+├──📄package.json
+└──📄tsconfig.json
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+## 📝 Licença
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Projeto acadêmico e livre de licença.
