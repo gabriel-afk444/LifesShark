@@ -4,7 +4,7 @@ import { ScrollView, Text, StyleSheet, View, Image } from 'react-native';
 export default function Porto() {
   return (
     <ScrollView style={styles.container}>
-      {/* Imagem da Praia de Porto de Galinhas */}
+      {}
       <Image
         source={{
           uri: 'https://pousadadasgalinhas.com.br/wp-content/uploads/2024/07/porto-de-galinhas-2.webp',
@@ -38,12 +38,11 @@ export default function Porto() {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: '#f4f4f4', // Manter o fundo claro
-    flex: 1,
+    backgroundColor: '#f4f4f4', 
   },
   image: {
     width: '100%',
-    height: 200, // Ajuste o tamanho conforme necessário
+    height: 200, 
     borderRadius: 10,
     marginBottom: 20,
   },
