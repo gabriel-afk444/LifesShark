@@ -2,21 +2,19 @@ import { Collapsible } from '@/components/Collapsible';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import { StyleSheet } from 'react-native';
+//import { IconSymbol } from '@/components/ui/IconSymbol';
+import { Image, StyleSheet } from 'react-native';
 
 export default function TabTwoScreen() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
       headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name='chevron-down.fill'
-          style={styles.headerImage}
-        />
-      }>
+              <Image
+                source={require('@/assets/images/LifeShark.png')}
+                style={styles.reactLogo}
+              />
+            }>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Projeto LifeShark</ThemedText>
       </ThemedView>
@@ -69,6 +67,13 @@ const styles = StyleSheet.create({
     bottom: -90,
     left: -35,
     position: 'absolute',
+  },
+  reactLogo: {
+    height: 250,
+    width: 380,
+    bottom: 0,
+    left: 0,
+    position: 'relative',
   },
   titleContainer: {
     flexDirection: 'row',
